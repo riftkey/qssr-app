@@ -33,6 +33,7 @@ const LoginPage = () => {
 
     // simpan token ke localStorage
     localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username); 
 
     console.log("Login berhasil:", data);
     setError("");

@@ -197,10 +197,6 @@ const ContactsPage = () => {
           intro: "Klik ini untuk menyimpan semua perubahan ke server.",
         },
         {
-          element: ".tombol-export",
-          intro: "Export seluruh data kontak ke format CSV.",
-        },
-        {
           element: ".tombol-import",
           intro: "Import data kontak dari file CSV. Pastikan formatnya sesuai.",
         },
@@ -211,6 +207,10 @@ const ContactsPage = () => {
         {
           element: ".link-panduan",
           intro: "Klik ini untuk membuka panduan resmi QS untuk kontak akademik dan employer.",
+        },
+        {
+          element: ".tombol-export",
+          intro: "Export seluruh data kontak ke format CSV. Anda dapat melakukan submisi CSV ini ke QS melalui portal QS. Tekan Tombol Panduan QS untuk melihat panduan resmi submisi kontak. Hal ini akan membantu meningkatkan nilai pada ES3, EO1, EO6,EQ6, IE2,KE3, dan GG9",
         },
       ],
       showProgress: true,

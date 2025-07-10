@@ -26,7 +26,7 @@ const DaftarIndikator = () => {
         },
         {
           element: '#table-indikator',
-          intro: 'Ini adalah tabel indikator. Klik salah satu baris untuk input data.',
+          intro: 'Ini adalah tabel indikator. Klik salah satu baris untuk input data. Pada Sumber QS, data tidak perlu diisi. Untuk sumber Institusi, kamu perlu mengisi penjelasan, link bukti, dan dokumen pendukung.',
         },
         {
           element: '#penjelasan',
@@ -43,6 +43,10 @@ const DaftarIndikator = () => {
         {
           element: '#simpan-data',
           intro: 'Klik untuk menyimpan data yang sudah kamu isi.',
+        },
+        {
+          element: '#export',
+          intro: 'Jika semua indikator sudah diisi, kamu bisa melakukan export seluruh data ke excel berikut untuk melakukan submisi ke QS Hub.',
         },
       ],
       showProgress: true,
@@ -186,6 +190,7 @@ const handleSubmit = async (indicatorCode) => {
   <a
     href="https://qssr-app-production.up.railway.app/api/indikator/export/excel?year=2025"
     className="bg-green-700 text-white px-4 py-2 rounded"
+    id="export"
     target="_blank"
     rel="noopener noreferrer"
   >

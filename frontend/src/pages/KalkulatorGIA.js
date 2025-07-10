@@ -82,10 +82,6 @@ const GIACalculator = () => {
           intro: "Pilih kampus dan tahun pelaporan terlebih dahulu.",
         },
         {
-          element: ".summary-gia",
-          intro: "Ini adalah ringkasan total luas GIA seluruh gedung untuk kampus & tahun terpilih.",
-        },
-        {
           element: ".input-gedung",
           intro: "Isi nama gedung dan luas internal masing-masing di sini.",
         },
@@ -96,6 +92,10 @@ const GIACalculator = () => {
         {
           element: ".tombol-simpan-gia",
           intro: "Kalau sudah selesai mengisi, klik tombol ini untuk menyimpan data.",
+        },
+        {
+          element: ".summary-gia",
+          intro: "Ini adalah ringkasan total luas GIA seluruh gedung untuk kampus & tahun terpilih. Jika sudah selesai mengisi data, kamu bisa melihat total GIA di sini dan memasukkanya ke penjelasan indikator ES7",
         },
       ],
       showProgress: true,

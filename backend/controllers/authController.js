@@ -24,7 +24,13 @@ export const login = async (req, res) => {
     { expiresIn: "1d" }
   );
 
-  res.json({ token, role: user.role, message: "Login berhasil" });
+  res.json({
+  token,
+  role: user.role,
+  username: user.username, // tambahin ini
+  message: "Login berhasil"
+});
+
 };
 
 export const register = async (req, res) => {

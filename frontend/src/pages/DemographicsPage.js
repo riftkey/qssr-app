@@ -195,15 +195,15 @@ const DemografiPage = () => {
       steps: [
         {
           element: ".tabel-demografi",
-          intro: "Isi data jumlah staf dan mahasiswa per fakultas berdasarkan gender.",
+          intro: "Isi data jumlah staf dan mahasiswa per fakultas berdasarkan gender. Data ini akan digunakan untuk indikator EQ2",
         },
         {
           element: ".tambah-fakultas",
-          intro: "Klik tombol ini untuk menambahkan baris fakultas baru.",
+          intro: "Klik tombol ini untuk menambahkan baris fakultas baru. Data ini akan digunakan untuk indikator EQ3",
         },
         {
           element: ".data-kepemimpinan",
-          intro: "Masukkan nama, jabatan, unit, dan gender pimpinan institusi.",
+          intro: "Masukkan nama, jabatan, unit, dan gender pimpinan institusi. Data ini akan digunakan untuk indikator EQ4",
         },
         {
           element: ".tambah-pemimpin",

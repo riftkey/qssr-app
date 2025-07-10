@@ -92,10 +92,6 @@ const RenewableEnergyCalculator = () => {
           intro: "Pilih kampus dan tahun pelaporan terlebih dahulu.",
         },
         {
-          element: ".summary-renewable",
-          intro: "Total seluruh energi terbarukan yang digunakan pada tahun dan kampus ini.",
-        },
-        {
           element: ".input-renewable",
           intro: "Isi kategori sumber, nama alat/lokasi, dan jumlah energi yang dihasilkan.",
         },
@@ -106,6 +102,10 @@ const RenewableEnergyCalculator = () => {
         {
           element: ".tombol-simpan-renewable",
           intro: "Setelah selesai, klik untuk menyimpan semua data.",
+        },
+        {
+          element: ".summary-renewable",
+          intro: "Total seluruh energi terbarukan yang digunakan pada tahun dan kampus ini. Jika sudah selesai mengisi data, kamu bisa melihat total energi terbarukan di sini dan memasukkannya ke penjelasan indikator ES8.",
         },
       ],
       showProgress: true,

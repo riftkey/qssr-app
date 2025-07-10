@@ -97,7 +97,7 @@ const ResearchPartnershipPage = () => {
   href="https://scholar.itb.ac.id/project"
   target="_blank"
   rel="noopener noreferrer"
-  className="bg-indigo-600 text-white px-3 py-1 rounded"
+  className="bg-indigo-600 text-white px-3 py-1 rounded tombol-kemitraan"
 >
   Lihat Kemitraan ITB
 </a>
@@ -125,6 +125,10 @@ const ResearchPartnershipPage = () => {
     introJs().setOptions({
       steps: [
         {
+          element: ".tombol-kemitraan",
+          intro: "Klik ini untuk membuka scholar.itb.ac.id dan melihat secara lengkap data kemitraan penelitian ITB.",
+        },
+        {
           element: ".tombol-export",
           intro: "Klik ini untuk mengunduh data kemitraan penelitian dalam format CSV.",
         },
@@ -137,13 +141,14 @@ const ResearchPartnershipPage = () => {
           intro: "Tambah baris baru untuk mengisi data penelitian baru.",
         },
         {
-          element: ".total-mitra",
-          intro: "Jumlah mitra perusahaan unik dalam 5 tahun terakhir akan otomatis dihitung di sini.",
-        },
-        {
           element: ".tabel-input",
           intro: "Semua data bisa diedit langsung di tabel ini. Anda juga bisa menghapus baris dengan tombol 'Hapus'.",
         },
+        {
+          element: ".total-mitra",
+          intro: "Jumlah mitra perusahaan unik dalam 5 tahun terakhir akan otomatis dihitung di sini. Hal ini berguna untuk mengestimasi nilai ITB pada Indikator EO5.",
+        },
+        
       ],
       showProgress: true,
       showBullets: false,

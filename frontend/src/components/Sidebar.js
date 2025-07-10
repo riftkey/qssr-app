@@ -9,6 +9,8 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
     navigate("/login");
   };
     return (

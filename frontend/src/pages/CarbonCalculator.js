@@ -100,10 +100,6 @@ const CarbonCalculator = () => {
           intro: "Pilih tahun pelaporan untuk melihat data emisi tahun tersebut.",
         },
         {
-          element: ".card-total-emisi",
-          intro: "Ini adalah total emisi gabungan dari semua scope untuk tahun terpilih.",
-        },
-        {
           element: ".card-scope-1",
           intro: "Menampilkan total emisi Scope 1 per sumber dan kampus.",
         },
@@ -113,7 +109,11 @@ const CarbonCalculator = () => {
         },
         {
           element: ".card-baseline-summary",
-          intro: "Ringkasan baseline dan target emisi tahun ini.",
+          intro: "Ringkasan baseline dan target emisi tahun ini. Kamu bisa mengubah target net zero, baseline year, dan emisi base line year di sini. Jika sudah hasil ini bisa dimasukkan ke ES9",
+        },
+        {
+          element: ".card-total-emisi",
+          intro: "Ini adalah total emisi gabungan dari semua scope untuk tahun terpilih. Jika sudah selesai mengisi data, kamu bisa melihat total emisi di sini. dan memasukkanya ke penjelasan indikator ES7",
         },
       ],
       showProgress: true,
