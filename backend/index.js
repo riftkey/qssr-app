@@ -21,10 +21,29 @@ import subindikatorRoutes from "./routes/subindikatorRoutes.js";
 
 
 const app = express();
+
+
+
+const allowedOrigins = [
+  'http://localhost:5173',       // lokal
+  'http://localhost:3000',       // lokal lain
+  'https://qssr-app-production-87f1.up.railway.app/', // ganti domain prod lu
+];
+
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like Postman or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // kalau pakai cookie/token
 }));
+
+
 dotenv.config();
 
 app.use(express.json());
