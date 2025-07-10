@@ -27,7 +27,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',       // lokal
   'http://localhost:3000',       // lokal lain
-  'https://qssr-app-production-87f1.up.railway.app/', // ganti domain prod lu
+  'https://qssr-app-production-87f1.up.railway.app', // ganti domain prod lu
 ];
 
 app.use(cors({
