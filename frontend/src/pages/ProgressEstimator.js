@@ -16,12 +16,12 @@ const ProgressEstimator = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/emission-baseline/${campus}`);
+        const res = await fetch(`http://qssr-app-production.up.railway.app/api/emission-baseline/${campus}`);
         const d = await res.json();
         setBaselineYear(d.baseline_year);
         setBaselineEmission(d.baseline_emission);
 
-        const resTarget = await fetch(`http://localhost:5000/api/netzero/${campus}`);
+        const resTarget = await fetch(`http://qssr-app-production.up.railway.app/api/netzero/${campus}`);
         const dTarget = await resTarget.json();
         setTargetYear(dTarget.target_year);
       } catch (err) {

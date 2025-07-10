@@ -9,7 +9,7 @@ const BaselineSummaryCard = ({ selectedYear }) => {
   useEffect(() => {
     const fetchBaseline = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/netzero/");
+        const res = await fetch("http://qssr-app-production.up.railway.app/api/netzero/");
         if (res.ok) {
           const data = await res.json();
           setBaselineData(data);
@@ -31,13 +31,13 @@ const BaselineSummaryCard = ({ selectedYear }) => {
 
       // reported emissions per campus
       const reportedRes = await fetch(
-        `http://localhost:5000/api/emissions/summary-campus/${campus}/${currentYear}`
+        `http://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${currentYear}`
       );
       const reportedData = await reportedRes.json();
       const reportedTotal = reportedData.total || 0;
 
       const progressRes = await fetch(
-        `http://localhost:5000/api/netzero/${campus}/${currentYear}/progress/${reportedTotal}`
+        `http://qssr-app-production.up.railway.app/api/netzero/${campus}/${currentYear}/progress/${reportedTotal}`
       );
       if (progressRes.ok) {
         return progressRes.json();

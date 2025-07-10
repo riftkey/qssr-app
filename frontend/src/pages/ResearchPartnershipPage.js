@@ -13,7 +13,7 @@ const ResearchPartnershipPage = () => {
 
   const fetchData = async () => {
   try {
-    const res = await fetch("http://localhost:5000/api/research-partnerships");
+    const res = await fetch("http://qssr-app-production.up.railway.app/api/research-partnerships");
     const json = await res.json();
     setData(json);
 
@@ -51,7 +51,7 @@ const ResearchPartnershipPage = () => {
 
   const handleSaveAll = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/research-partnerships/bulk", {
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/research-partnerships/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ partnerships: data }),
@@ -71,7 +71,7 @@ const ResearchPartnershipPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Hapus data ini?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/research-partnerships/${id}`, {
+      const res = await fetch(`http://qssr-app-production.up.railway.app/api/research-partnerships/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -85,7 +85,7 @@ const ResearchPartnershipPage = () => {
   };
 
   const handleExport = () => {
-    window.open("http://localhost:5000/api/research-partnerships/export", "_blank");
+    window.open("http://qssr-app-production.up.railway.app/api/research-partnerships/export", "_blank");
   };
 
   return (

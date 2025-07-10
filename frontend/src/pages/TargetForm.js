@@ -9,7 +9,7 @@ const TargetForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("http://localhost:5000/api/netzero", {
+      await fetch("http://qssr-app-production.up.railway.app/api/netzero", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

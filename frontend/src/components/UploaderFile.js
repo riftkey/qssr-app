@@ -20,7 +20,7 @@ export default function UploadDataCollection() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/data-collection/upload",
+        "http://qssr-app-production.up.railway.app/api/data-collection/upload",
         {
           method: "POST",
           body: formData,

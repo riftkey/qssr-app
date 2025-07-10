@@ -12,7 +12,7 @@ const QSSRTable = () => {
   useEffect(() => {
     const fetchLensSummary = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/indikator/lens-summary/institusi");
+        const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator/lens-summary/institusi");
         if (!res.ok) throw new Error("Gagal ambil data");
         const fetchedData = await res.json();
 

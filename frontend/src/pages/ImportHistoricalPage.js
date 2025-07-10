@@ -11,7 +11,7 @@ const ImportHistoricalPage = () => {
   useEffect(() => {
     const fetchIndikator = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/indikator");
+        const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator");
         const data = await res.json();
         setIndikatorList(data);
       } catch (err) {
@@ -30,7 +30,7 @@ const ImportHistoricalPage = () => {
   };
 //   const handlePreview = async () => {
 //   try {
-//     const res = await fetch("http://localhost:5000/api/data-collection/preview-import", {
+//     const res = await fetch("http://qssr-app-production.up.railway.app/api/data-collection/preview-import", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify({
@@ -54,7 +54,7 @@ const ImportHistoricalPage = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/data-collection/import", {
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/data-collection/import", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

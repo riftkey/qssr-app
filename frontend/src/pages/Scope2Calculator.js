@@ -35,7 +35,7 @@ const Scope2Calculator = () => {
   const handleSave = async () => {
     try {
       await fetch(
-        `http://localhost:5000/api/scope2/${selectedCampus}/${selectedYear}`,
+        `http://qssr-app-production.up.railway.app/api/scope2/${selectedCampus}/${selectedYear}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ const Scope2Calculator = () => {
   const fetchData = async () => {
     try {
       const res = await fetch(
-          `http://localhost:5000/api/scope2/${selectedCampus}/${selectedYear}`
+          `http://qssr-app-production.up.railway.app/api/scope2/${selectedCampus}/${selectedYear}`
         );
 
       if (res.ok) {

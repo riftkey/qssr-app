@@ -9,7 +9,7 @@ const CardTotalEmisi = ({ year }) => {
     const fetchEmisi = async () => {
       try {
         // total semua kampus
-        const resAll = await fetch(`http://localhost:5000/api/emissions/summary-all/${year}`);
+        const resAll = await fetch(`http://qssr-app-production.up.railway.app/api/emissions/summary-all/${year}`);
         const dataAll = await resAll.json();
         setTotalAll(dataAll.total || 0);
 
@@ -18,7 +18,7 @@ const CardTotalEmisi = ({ year }) => {
         const results = await Promise.all(
           campuses.map(async (campus) => {
             const res = await fetch(
-              `http://localhost:5000/api/emissions/summary-campus/${campus}/${year}`
+              `http://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${year}`
             );
             const data = await res.json();
             return {

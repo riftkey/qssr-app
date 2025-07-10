@@ -16,7 +16,7 @@ const ContactsPage = () => {
   const fetchContacts = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/contacts/${contactType}?search=${searchTerm}`
+        `http://qssr-app-production.up.railway.app/api/contacts/${contactType}?search=${searchTerm}`
       );
       const data = await res.json();
       setContacts(data);
@@ -27,7 +27,7 @@ const ContactsPage = () => {
 
   const handleExport = () => {
     window.open(
-      `http://localhost:5000/api/contacts/${contactType}/export`,
+      `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/export`,
       "_blank"
     );
   };
@@ -79,7 +79,7 @@ const ContactsPage = () => {
         return c;
       });
 
-      const res = await fetch("http://localhost:5000/api/contacts/bulk", {
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/contacts/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -240,7 +240,7 @@ const ContactsPage = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/contacts/${contactType}/import`,
+          `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/import`,
           {
             method: "POST",
             body: formData,
@@ -339,7 +339,7 @@ const ContactsPage = () => {
                 onClick={async () => {
                   try {
                     const res = await fetch(
-                      `http://localhost:5000/api/contacts/${contactType}/${deleteConfirm.id}`,
+                      `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/${deleteConfirm.id}`,
                       { method: "DELETE" }
                     );
                     if (res.ok) {

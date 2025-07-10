@@ -28,7 +28,7 @@ const HistoricalDataPage = () => {
 
   const fetchIndikator = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/indikator");
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator");
       const data = await res.json();
       setIndikatorList(data);
     } catch (err) {
@@ -46,7 +46,7 @@ const HistoricalDataPage = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/data-collection/${indikator.code}/${selectedYear}`
+        `http://qssr-app-production.up.railway.app/api/data-collection/${indikator.code}/${selectedYear}`
       );
       const data = await res.json();
       if (data) {
@@ -71,7 +71,7 @@ const HistoricalDataPage = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/data-collection/submit", {
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/data-collection/submit", {
         method: "POST",
         body: formData,
       });
@@ -221,7 +221,7 @@ const HistoricalDataPage = () => {
             <div>
               <p className="text-sm">File sebelumnya:</p>
               <a
-                href={`http://localhost:5000/uploads/${documentPath}`}
+                href={`http://qssr-app-production.up.railway.app/uploads/${documentPath}`}
                 className="text-blue-600 underline"
                 target="_blank"
                 rel="noreferrer"

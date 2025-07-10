@@ -45,7 +45,7 @@ const AddIndikator = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/indikator", {
+      const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
