@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import introJs from 'intro.js';
 import 'intro.js/introjs.css';
 import Papa from "papaparse";
-
+import { supabase } from "../supabaseClient"; // sesuaikan path-mu
+import { v4 as uuidv4 } from "uuid"; // install dulu kalau belum: npm i uuid
 
 
 const DaftarIndikator = () => {
@@ -85,32 +86,53 @@ const DaftarIndikator = () => {
     }
   };
 
-  const handleSubmit = async (indicatorCode) => {
-    const indikator = filteredData.find(i => i.code === indicatorCode);
-    if (!indikator) return alert("Indikator tidak ditemukan");
 
-    const formData = new FormData();
-    formData.append("indicator_id", indikator.indicator_id);
-    formData.append("year", 2025);
-    formData.append("value", penjelasan);
-    formData.append("evidence_url", linkBukti);
-    formData.append("submitted_by", 1);
-    if (fileDokumen) {
-      formData.append("document", fileDokumen);
+
+const handleSubmit = async (indicatorCode) => {
+  const indikator = filteredData.find(i => i.code === indicatorCode);
+  if (!indikator) return alert("Indikator tidak ditemukan");
+
+  let uploadedFilePath = null;
+
+  if (fileDokumen) {
+    const fileExt = fileDokumen.name.split(".").pop();
+    const fileName = `${uuidv4()}.${fileExt}`;
+    const { data, error } = await supabase.storage
+      .from("qssr-files") // nama bucket kamu
+      .upload(fileName, fileDokumen);
+
+    if (error) {
+      console.error("Upload gagal:", error.message);
+      return alert("Gagal upload dokumen");
     }
 
-    try {
-      const res = await fetch("https://qssr-app-production.up.railway.app/api/data-collection/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      alert(data.message || "Sukses!");
-    } catch (err) {
-      console.error(err);
-      alert("Gagal menyimpan data");
-    }
-  };
+    uploadedFilePath = fileName;
+  }
+
+  try {
+    const res = await fetch("https://qssr-app-production.up.railway.app/api/data-collection/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        indicator_id: indikator.indicator_id,
+        year: 2025,
+        value: penjelasan,
+        evidence_url: linkBukti,
+        submitted_by: 1,
+        document_path: uploadedFilePath
+      }),
+    });
+
+    const data = await res.json();
+    alert(data.message || "Sukses!");
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan data");
+  }
+};
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -275,7 +297,7 @@ const DaftarIndikator = () => {
             <div className="mt-2">
               <label className="block font-semibold mb-1">File Sebelumnya</label>
               <a
-                href={`https://qssr-app-production.up.railway.app/uploads/${documentPath}`}
+                href={`https://xprwmhelbpaiwzfeyblo.supabase.co/storage/v1/object/public/qssr-files/${documentPath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 underline"
