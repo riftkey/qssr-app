@@ -142,6 +142,16 @@ const HistoricalDataPage = () => {
     >
       Mulai Panduan
     </button>
+    <a
+  href={`https://qssr-app-production.up.railway.app/api/data-collection/export/excel?year=${selectedYear}`}
+  className="bg-green-700 text-white px-4 py-2 rounded"
+  id="export"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Export Excel
+</a>
+
 
     <button
       id="tombol-import"

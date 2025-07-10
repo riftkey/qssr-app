@@ -1,4 +1,5 @@
 import pool from "../config/db.js";
+import ExcelJS from "exceljs";
 
 
 
@@ -192,5 +193,73 @@ export const getDataCollectionByCodeAndYear = async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+import pool from "../config/db.js";
+import ExcelJS from "exceljs";
+
+export const exportDataCollectionExcel = async (req, res) => {
+  const { year } = req.query;
+
+  if (!year) {
+    return res.status(400).json({ message: "Tahun harus disertakan" });
+  }
+
+  try {
+    // Fetch data gabungan
+    const { rows } = await pool.query(
+      `SELECT dc.*, i.code, i.name AS indicator_name, i.lens_category, i.category
+       FROM data_collection dc
+       JOIN indicators i ON dc.indicator_id = i.indicator_id
+       WHERE dc.year = $1`,
+      [year]
+    );
+
+    if (!rows.length) {
+      return res.status(404).json({ message: "Data tidak ditemukan" });
+    }
+
+    // Buat workbook Excel
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet(`Data Tahun ${year}`);
+
+    worksheet.columns = [
+      { header: "Kode", key: "code", width: 15 },
+      { header: "Nama Indikator", key: "indicator_name", width: 30 },
+      { header: "Kategori", key: "category", width: 20 },
+      { header: "Lensa", key: "lens_category", width: 20 },
+      { header: "Tahun", key: "year", width: 10 },
+      { header: "Nilai / Penjelasan", key: "value", width: 40 },
+      { header: "Link Bukti", key: "evidence_url", width: 30 },
+      { header: "Path Dokumen", key: "document_path", width: 30 },
+    ];
+
+    // Isi data
+    rows.forEach((row) => {
+      worksheet.addRow({
+        code: row.code,
+        indicator_name: row.indicator_name,
+        category: row.category,
+        lens_category: row.lens_category,
+        year: row.year,
+        value: row.value,
+        evidence_url: row.evidence_url,
+        document_path: row.document_path,
+      });
+    });
+
+    // Response Excel
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=data-collection-${year}.xlsx`
+    );
+    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error("Gagal export Excel:", err);
+    res.status(500).json({ message: "Gagal export data ke Excel" });
   }
 };

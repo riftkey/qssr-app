@@ -1,8 +1,11 @@
 import express from "express";
 import pool from "../config/db.js";
-import { getDataCollectionByCodeAndYear } from "../controllers/dataCollectionController.js";
+
+import { getDataCollectionByCodeAndYear,exportDataCollectionExcel  } from "../controllers/dataCollectionController.js";
 
 const router = express.Router();
+
+router.get("/export/excel", exportDataCollectionExcel);
 
 // GET data collection by code + year
 router.get("/:code/:year", getDataCollectionByCodeAndYear);
