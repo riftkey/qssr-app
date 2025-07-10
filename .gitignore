@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output
+
+# Compiled addons / build
+build/
+dist/
+.cache/
+
+# Dependency directories
+node_modules/
+bower_components/
+jspm_packages/
+
+# Environment variable files
+.env
+.env.*     # include .env.local, .env.production, etc
+!.env.example
+
+# Uploads (from your backend)
+uploads/
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Database (jika pakai sqlite)
+*.sqlite
+*.db
+
+# Others
+*.tgz
+*.tsbuildinfo
+.eslintcache
