@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import introJs from "intro.js";
 import "intro.js/introjs.css";
+import { supabase } from "../supabaseClient"; // tambahkan ini di atas
+import { v4 as uuidv4 } from "uuid"; // pastikan ini juga di-import
 
 
 
@@ -60,28 +62,47 @@ const HistoricalDataPage = () => {
   };
 
   const handleSubmit = async (indikator) => {
-    const formData = new FormData();
-    formData.append("indicator_id", indikator.indicator_id);
-    formData.append("year", selectedYear);
-    formData.append("value", penjelasan);
-    formData.append("evidence_url", linkBukti);
-    formData.append("submitted_by", 1);
-    if (fileDokumen) {
-      formData.append("document", fileDokumen);
+  let uploadedFilePath = null;
+
+  if (fileDokumen) {
+    const fileExt = fileDokumen.name.split(".").pop();
+    const fileName = `${uuidv4()}.${fileExt}`;
+
+    const { error } = await supabase.storage
+      .from("qssr-files") // nama bucket kamu
+      .upload(fileName, fileDokumen);
+
+    if (error) {
+      console.error("Upload gagal:", error.message);
+      return alert("Gagal upload dokumen");
     }
 
-    try {
-      const res = await fetch("https://qssr-app-production.up.railway.app/api/data-collection/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      alert(data.message || "Sukses menyimpan!");
-    } catch (err) {
-      console.error("Submit error:", err);
-      alert("Gagal menyimpan data.");
-    }
-  };
+    uploadedFilePath = fileName;
+  }
+
+  try {
+    const res = await fetch("https://qssr-app-production.up.railway.app/api/data-collection/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        indicator_id: indikator.indicator_id,
+        year: selectedYear,
+        value: penjelasan,
+        evidence_url: linkBukti,
+        submitted_by: 1,
+        document_path: uploadedFilePath
+      }),
+    });
+
+    const data = await res.json();
+    alert(data.message || "Sukses menyimpan!");
+  } catch (err) {
+    console.error("Submit error:", err);
+    alert("Gagal menyimpan data.");
+  }
+};
   const startTour = () => {
   introJs().setOptions({
     nextLabel: 'Lanjut',
@@ -221,7 +242,7 @@ const HistoricalDataPage = () => {
             <div>
               <p className="text-sm">File sebelumnya:</p>
               <a
-                href={`https://qssr-app-production.up.railway.app/uploads/${documentPath}`}
+                href={`https://xprwmhelbpaiwzfeyblo.supabase.co/storage/v1/object/public/qssr-files/${documentPath}`}
                 className="text-blue-600 underline"
                 target="_blank"
                 rel="noreferrer"
