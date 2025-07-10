@@ -14,6 +14,7 @@ import contactsRoutes from "./routes/contactsRoutes.js";
 import researchPartnershipRoutes from "./routes/researchPartnershipRoutes.js";
 import demographicRoutes from "./routes/demographicRoutes.js";
 import subindikatorRoutes from "./routes/subindikatorRoutes.js";
+import uploadsRoutes from "./routes/uploadsRoutes.js";
 
 
 
@@ -22,7 +23,7 @@ import subindikatorRoutes from "./routes/subindikatorRoutes.js";
 
 const app = express();
 
-
+dotenv.config();
 
 const allowedOrigins = [
   'http://localhost:5173',       // lokal
@@ -44,7 +45,7 @@ app.use(cors({
 }));
 
 
-dotenv.config();
+
 
 app.use(express.json());
 app.use("/api/scope2", scope2Routes);
@@ -61,6 +62,7 @@ app.use("/api/research-partnerships", researchPartnershipRoutes);
 app.use("/api/demographics", demographicRoutes);
 app.use("/api/subindikator", subindikatorRoutes);
 app.use("/uploads", express.static("uploads"));
+app.use("/api/uploads", uploadsRoutes);
 
 
 const PORT = process.env.PORT || 5000;

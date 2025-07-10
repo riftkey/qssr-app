@@ -7,12 +7,12 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.4",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "csv-parser": "^3.2.0",
