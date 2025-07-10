@@ -21,7 +21,7 @@ const EditIndikator = () => {
 
   const fetchIndikatorByKode = async () => {
     try {
-      const res = await fetch(`http://qssr-app-production.up.railway.app/api/indikator/${kode}`);
+      const res = await fetch(`https://qssr-app-production.up.railway.app/api/indikator/${kode}`);
       const data = await res.json();
 
       setForm((prev) => ({
@@ -101,7 +101,7 @@ const EditIndikator = () => {
   };
 
   try {
-    const res = await fetch(`http://qssr-app-production.up.railway.app/api/indikator/${form.kode}`, {
+    const res = await fetch(`https://qssr-app-production.up.railway.app/api/indikator/${form.kode}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const handleDelete = async () => {
   if (!window.confirm("Apakah kamu yakin ingin menghapus indikator ini?")) return;
 
   try {
-    const res = await fetch(`http://qssr-app-production.up.railway.app/api/indikator/${form.kode}`, {
+    const res = await fetch(`https://qssr-app-production.up.railway.app/api/indikator/${form.kode}`, {
       method: "DELETE",
     });
 
@@ -244,7 +244,7 @@ const handleDelete = async () => {
               name="hyperlinkQS"
               value={form.hyperlinkQS}
               onChange={handleChange}
-              placeholder="https://...."
+              placeholder="httpss://...."
             />
           </div>
         )}

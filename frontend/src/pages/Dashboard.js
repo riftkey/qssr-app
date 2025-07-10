@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await axios.get('http://qssr-app-production.up.railway.app/api/indikator/summary');
+        const res = await axios.get('https://qssr-app-production.up.railway.app/api/indikator/summary');
         setSummary(res.data);
       } catch (error) {
         console.error("Gagal fetch ringkasan indikator:", error);

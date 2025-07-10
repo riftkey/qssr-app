@@ -32,20 +32,20 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
     const fetchAllData = async () => {
       try {
         // baseline
-        const resBaseline = await fetch(`http://qssr-app-production.up.railway.app/api/emission-baseline/${campus}`);
+        const resBaseline = await fetch(`https://qssr-app-production.up.railway.app/api/emission-baseline/${campus}`);
         if (resBaseline.ok) {
           const d = await resBaseline.json();
           setBaselineYear(d.baseline_year);
           setBaselineEmission(d.baseline_emission);
         }
         // target
-        const resTarget = await fetch(`http://qssr-app-production.up.railway.app/api/netzero/${campus}`);
+        const resTarget = await fetch(`https://qssr-app-production.up.railway.app/api/netzero/${campus}`);
         if (resTarget.ok) {
           const d = await resTarget.json();
           setTargetYear(d.target_year);
         }
         // trend
-        const resTrend = await fetch(`http://qssr-app-production.up.railway.app/api/emission-trend/${campus}`);
+        const resTrend = await fetch(`https://qssr-app-production.up.railway.app/api/emission-trend/${campus}`);
         if (resTrend.ok) {
           const d = await resTrend.json();
           setTrendData(d);

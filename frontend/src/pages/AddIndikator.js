@@ -45,7 +45,7 @@ const AddIndikator = () => {
     }
 
     try {
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator", {
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/indikator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -107,7 +107,7 @@ const AddIndikator = () => {
             name="hyperlinkQS"
             value={form.hyperlinkQS}
             onChange={handleChange}
-            placeholder="https://...."
+            placeholder="httpss://...."
           />
         )}
 

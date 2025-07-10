@@ -74,13 +74,13 @@ const DemografiPage = () => {
   // DITARO DI LUAR useEffect
   const fetchData = async () => {
     try {
-      const staffRes = await fetch("http://qssr-app-production.up.railway.app/api/demographics/staff");
+      const staffRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/staff");
       const staffData = await staffRes.json();
 
-      const studentRes = await fetch("http://qssr-app-production.up.railway.app/api/demographics/student");
+      const studentRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/student");
       const studentData = await studentRes.json();
 
-      const leadershipRes = await fetch("http://qssr-app-production.up.railway.app/api/demographics/leadership");
+      const leadershipRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/leadership");
       const leadershipData = await leadershipRes.json();
 
       const fakultasSet = new Set([
@@ -125,7 +125,7 @@ const DemografiPage = () => {
 
   const handleSave = async () => {
     try {
-      await fetch("http://qssr-app-production.up.railway.app/api/demographics/staff/bulk", {
+      await fetch("https://qssr-app-production.up.railway.app/api/demographics/staff/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -138,7 +138,7 @@ const DemografiPage = () => {
         }),
       });
 
-      await fetch("http://qssr-app-production.up.railway.app/api/demographics/student/bulk", {
+      await fetch("https://qssr-app-production.up.railway.app/api/demographics/student/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -151,7 +151,7 @@ const DemografiPage = () => {
         }),
       });
 
-      await fetch("http://qssr-app-production.up.railway.app/api/demographics/leadership/bulk", {
+      await fetch("https://qssr-app-production.up.railway.app/api/demographics/leadership/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

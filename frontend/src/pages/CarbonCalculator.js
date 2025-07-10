@@ -18,7 +18,7 @@ const CarbonCalculator = () => {
     const fetchScope1 = async () => {
       try {
         const res = await fetch(
-          `http://qssr-app-production.up.railway.app/api/emissions/scope1-summary/${selectedYear}`
+          `https://qssr-app-production.up.railway.app/api/emissions/scope1-summary/${selectedYear}`
         );
         if (res.ok) {
           const data = await res.json();
@@ -35,7 +35,7 @@ const CarbonCalculator = () => {
     const fetchScope2 = async () => {
       try {
         const res = await fetch(
-          `http://qssr-app-production.up.railway.app/api/emissions/scope2-summary/${selectedYear}`
+          `https://qssr-app-production.up.railway.app/api/emissions/scope2-summary/${selectedYear}`
         );
         if (res.ok) {
           const data = await res.json();
@@ -55,7 +55,7 @@ const CarbonCalculator = () => {
         const resultsScope1 = await Promise.all(
           campuses.map(async (campus) => {
             const res = await fetch(
-              `http://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${selectedYear}`
+              `https://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${selectedYear}`
             );
             const data = await res.json();
             return {
@@ -67,7 +67,7 @@ const CarbonCalculator = () => {
         const resultsScope2 = await Promise.all(
           campuses.map(async (campus) => {
             const res = await fetch(
-              `http://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${selectedYear}`
+              `https://qssr-app-production.up.railway.app/api/emissions/summary-campus/${campus}/${selectedYear}`
             );
             const data = await res.json();
             return {

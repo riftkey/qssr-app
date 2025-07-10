@@ -14,13 +14,13 @@ export default function UploadDataCollection() {
     formData.append("subindicator_id", 2);     // contoh
     formData.append("year", year);
     formData.append("value", value);
-    formData.append("evidence_url", "https://contoh.com/bukti2");
+    formData.append("evidence_url", "httpss://contoh.com/bukti2");
     formData.append("submitted_by", 1);        // contoh
     formData.append("validated_by", 2);        // contoh
 
     try {
       const response = await fetch(
-        "http://qssr-app-production.up.railway.app/api/data-collection/upload",
+        "https://qssr-app-production.up.railway.app/api/data-collection/upload",
         {
           method: "POST",
           body: formData,

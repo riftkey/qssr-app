@@ -10,7 +10,7 @@ const EmissionsBarChart = () => {
   useEffect(() => {
   const fetchEmisiTahunan = async () => {
     try {
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/emissions/summary-per-year");
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/emissions/summary-per-year");
       const result = await res.json();
 
       // Validasi dan format data

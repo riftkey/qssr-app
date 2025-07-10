@@ -12,7 +12,7 @@ const BaselineTargetForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://qssr-app-production.up.railway.app/api/netzero/${campus}`);
+        const res = await fetch(`https://qssr-app-production.up.railway.app/api/netzero/${campus}`);
         if (res.ok) {
           const data = await res.json();
           setBaselineYear(data.baseline_year || "");
@@ -28,7 +28,7 @@ const BaselineTargetForm = () => {
 
   const handleSave = async () => {
     try {
-      await fetch(`http://qssr-app-production.up.railway.app/api/netzero/${campus}`, {
+      await fetch(`https://qssr-app-production.up.railway.app/api/netzero/${campus}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

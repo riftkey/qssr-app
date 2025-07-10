@@ -16,7 +16,7 @@ const ContactsPage = () => {
   const fetchContacts = async () => {
     try {
       const res = await fetch(
-        `http://qssr-app-production.up.railway.app/api/contacts/${contactType}?search=${searchTerm}`
+        `https://qssr-app-production.up.railway.app/api/contacts/${contactType}?search=${searchTerm}`
       );
       const data = await res.json();
       setContacts(data);
@@ -27,7 +27,7 @@ const ContactsPage = () => {
 
   const handleExport = () => {
     window.open(
-      `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/export`,
+      `https://qssr-app-production.up.railway.app/api/contacts/${contactType}/export`,
       "_blank"
     );
   };
@@ -79,7 +79,7 @@ const ContactsPage = () => {
         return c;
       });
 
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/contacts/bulk", {
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/contacts/bulk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -169,7 +169,7 @@ const ContactsPage = () => {
     Tambah Baris
   </button>
   <a
-    href="https://support.qs.com/hc/en-gb/articles/4413986473618-Academic-and-Employer-Surveys"
+    href="httpss://support.qs.com/hc/en-gb/articles/4413986473618-Academic-and-Employer-Surveys"
     target="_blank"
     rel="noopener noreferrer"
     className="bg-purple-600 text-white px-3 py-1 rounded text-sm link-panduan"
@@ -240,7 +240,7 @@ const ContactsPage = () => {
 
       try {
         const res = await fetch(
-          `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/import`,
+          `https://qssr-app-production.up.railway.app/api/contacts/${contactType}/import`,
           {
             method: "POST",
             body: formData,
@@ -339,7 +339,7 @@ const ContactsPage = () => {
                 onClick={async () => {
                   try {
                     const res = await fetch(
-                      `http://qssr-app-production.up.railway.app/api/contacts/${contactType}/${deleteConfirm.id}`,
+                      `https://qssr-app-production.up.railway.app/api/contacts/${contactType}/${deleteConfirm.id}`,
                       { method: "DELETE" }
                     );
                     if (res.ok) {

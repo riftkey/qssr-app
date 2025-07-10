@@ -10,7 +10,7 @@ const EmissionsTrendChart = () => {
   useEffect(() => {
     const fetchTrend = async () => {
       try {
-        const res = await fetch("http://qssr-app-production.up.railway.app/api/emissions/summary-trend");
+        const res = await fetch("https://qssr-app-production.up.railway.app/api/emissions/summary-trend");
         const result = await res.json();
         setData(result);
       } catch (err) {

@@ -24,7 +24,7 @@ const GIACalculator = () => {
   const handleSave = async () => {
     try {
       await fetch(
-        `http://qssr-app-production.up.railway.app/api/gia/${selectedCampus}/${selectedYear}`,
+        `https://qssr-app-production.up.railway.app/api/gia/${selectedCampus}/${selectedYear}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ const GIACalculator = () => {
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `http://qssr-app-production.up.railway.app/api/gia/${selectedCampus}/${selectedYear}`
+        `https://qssr-app-production.up.railway.app/api/gia/${selectedCampus}/${selectedYear}`
       );
       if (res.ok) {
         const d = await res.json();

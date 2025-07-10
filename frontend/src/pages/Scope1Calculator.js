@@ -28,7 +28,7 @@ const Scope1Calculator = () => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://qssr-app-production.up.railway.app/api/scope1/${selectedCampus}/${selectedYear}`);
+      const res = await fetch(`https://qssr-app-production.up.railway.app/api/scope1/${selectedCampus}/${selectedYear}`);
 
       if (res.ok) {
         const data = await res.json();
@@ -129,7 +129,7 @@ const Scope1Calculator = () => {
 
 
 
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/scope1", {
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/scope1", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

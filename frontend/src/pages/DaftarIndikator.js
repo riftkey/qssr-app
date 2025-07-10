@@ -72,7 +72,7 @@ const DaftarIndikator = () => {
     const indikator = filteredData[index];
     if (indikator.source_data !== "QS") {
       try {
-        const res = await fetch(`http://qssr-app-production.up.railway.app/api/data-collection/${indikator.code}/2025`);
+        const res = await fetch(`https://qssr-app-production.up.railway.app/api/data-collection/${indikator.code}/2025`);
         const data = await res.json();
         if (data) {
           setPenjelasan(data.value || "");
@@ -100,7 +100,7 @@ const DaftarIndikator = () => {
     }
 
     try {
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/data-collection/submit", {
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/data-collection/submit", {
         method: "POST",
         body: formData,
       });
@@ -115,7 +115,7 @@ const DaftarIndikator = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator");
+        const res = await fetch("https://qssr-app-production.up.railway.app/api/indikator");
         const data = await res.json();
         setIndikatorList(data);
       } catch (err) {
@@ -162,7 +162,7 @@ const DaftarIndikator = () => {
     Mulai Panduan
   </button>
   <a
-    href="http://qssr-app-production.up.railway.app/api/indikator/export/excel?year=2025"
+    href="https://qssr-app-production.up.railway.app/api/indikator/export/excel?year=2025"
     className="bg-green-700 text-white px-4 py-2 rounded"
     target="_blank"
     rel="noopener noreferrer"
@@ -275,7 +275,7 @@ const DaftarIndikator = () => {
             <div className="mt-2">
               <label className="block font-semibold mb-1">File Sebelumnya</label>
               <a
-                href={`http://qssr-app-production.up.railway.app/uploads/${documentPath}`}
+                href={`https://qssr-app-production.up.railway.app/uploads/${documentPath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 underline"

@@ -32,7 +32,7 @@ const RenewableEnergyCalculator = () => {
   const handleSave = async () => {
     try {
       await fetch(
-        `http://qssr-app-production.up.railway.app/api/renewable/${selectedCampus}/${selectedYear}`,
+        `https://qssr-app-production.up.railway.app/api/renewable/${selectedCampus}/${selectedYear}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ const RenewableEnergyCalculator = () => {
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `http://qssr-app-production.up.railway.app/api/renewable/${selectedCampus}/${selectedYear}`
+        `https://qssr-app-production.up.railway.app/api/renewable/${selectedCampus}/${selectedYear}`
       );
       if (res.ok) {
         const d = await res.json();

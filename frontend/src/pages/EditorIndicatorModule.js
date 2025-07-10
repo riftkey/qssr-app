@@ -15,7 +15,7 @@ const EditorIndikatorModule = () => {
 
   const fetchIndikator = async () => {
     try {
-      const res = await fetch("http://qssr-app-production.up.railway.app/api/indikator");
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/indikator");
       const data = await res.json();
       setIndikatorList(data);
     } catch (err) {
@@ -25,7 +25,7 @@ const EditorIndikatorModule = () => {
 
   const handleToggleAktif = async (code, currentStatus) => {
     try {
-      const res = await fetch(`http://qssr-app-production.up.railway.app/api/indikator/${code}`, {
+      const res = await fetch(`https://qssr-app-production.up.railway.app/api/indikator/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const handleDeleteIndikator = async (code) => {
   if (!window.confirm("Yakin ingin menghapus indikator ini? Tindakan ini tidak dapat dibatalkan.")) return;
 
   try {
-    const res = await fetch(`http://qssr-app-production.up.railway.app/api/indikator/${code}`, {
+    const res = await fetch(`https://qssr-app-production.up.railway.app/api/indikator/${code}`, {
       method: "DELETE",
     });
 
@@ -111,7 +111,7 @@ const handleDeleteIndikator = async (code) => {
       Mulai Panduan
     </button>
     <a
-      href="https://support.qs.com/hc/en-gb/articles/8551503200668-QS-World-University-Rankings-Sustainability"
+      href="httpss://support.qs.com/hc/en-gb/articles/8551503200668-QS-World-University-Rankings-Sustainability"
       target="_blank"
       rel="noopener noreferrer"
       className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
