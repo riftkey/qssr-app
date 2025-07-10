@@ -14,7 +14,7 @@ import contactsRoutes from "./routes/contactsRoutes.js";
 import researchPartnershipRoutes from "./routes/researchPartnershipRoutes.js";
 import demographicRoutes from "./routes/demographicRoutes.js";
 import subindikatorRoutes from "./routes/subindikatorRoutes.js";
-import uploadsRoutes from "./routes/uploadsRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 
 
@@ -62,7 +62,7 @@ app.use("/api/research-partnerships", researchPartnershipRoutes);
 app.use("/api/demographics", demographicRoutes);
 app.use("/api/subindikator", subindikatorRoutes);
 app.use("/uploads", express.static("uploads"));
-app.use("/api/uploads", uploadsRoutes);
+app.use("/api/uploads", uploadRoutes);
 
 
 const PORT = process.env.PORT || 5000;
