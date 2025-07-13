@@ -32,6 +32,9 @@ const DemografiPage = () => {
   const [leaders, setLeaders] = useState([
     { name: "", position: "", gender: "", faculty: "" },
   ]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+const years = [2021, 2022, 2023, 2024, 2025]; // sesuaikan tahun yang di-support
+
 
   const handleChange = (index, field, value) => {
     const temp = [...data];
@@ -73,51 +76,55 @@ const DemografiPage = () => {
 
   // DITARO DI LUAR useEffect
   const fetchData = async () => {
-    try {
-      const staffRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/staff");
-      const staffData = await staffRes.json();
+  try {
+    const yearParam = `?year=${selectedYear}`;
 
-      const studentRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/student");
-      const studentData = await studentRes.json();
+    const staffRes = await fetch(`https://qssr-app-production.up.railway.app/api/demographics/staff${yearParam}`);
+    const staffData = await staffRes.json();
 
-      const leadershipRes = await fetch("https://qssr-app-production.up.railway.app/api/demographics/leadership");
-      const leadershipData = await leadershipRes.json();
+    const studentRes = await fetch(`https://qssr-app-production.up.railway.app/api/demographics/student${yearParam}`);
+    const studentData = await studentRes.json();
 
-      const fakultasSet = new Set([
-        ...staffData.map((s) => s.faculty),
-        ...studentData.map((s) => s.faculty),
-      ]);
+    const leadershipRes = await fetch(`https://qssr-app-production.up.railway.app/api/demographics/leadership${yearParam}`);
+    const leadershipData = await leadershipRes.json();
 
-      const merged = Array.from(fakultasSet).map((faculty) => {
-        const staff = staffData.find((s) => s.faculty === faculty) || {};
-        const student = studentData.find((s) => s.faculty === faculty) || {};
-        return {
-          fakultas: faculty,
-          id_staff: staff.id,
-          id_student: student.id,
-          staff_male: staff.male_count || 0,
-          staff_female: staff.female_count || 0,
-          student_male: student.male_count || 0,
-          student_female: student.female_count || 0,
-        };
-      });
+    const fakultasSet = new Set([
+      ...staffData.map((s) => s.faculty),
+      ...studentData.map((s) => s.faculty),
+    ]);
 
-      setData(merged);
+    const merged = Array.from(fakultasSet).map((faculty) => {
+      const staff = staffData.find((s) => s.faculty === faculty) || {};
+      const student = studentData.find((s) => s.faculty === faculty) || {};
+      return {
+        fakultas: faculty,
+        id_staff: staff.id,
+        id_student: student.id,
+        staff_male: staff.male_count || 0,
+        staff_female: staff.female_count || 0,
+        student_male: student.male_count || 0,
+        student_female: student.female_count || 0,
+      };
+    });
 
-      setLeaders(
-        leadershipData.map((item) => ({
-          id: item.id,
-          name: item.name,
-          position: item.position,
-          gender: item.gender,
-          faculty: item.unit,
-        }))
-      );
-    } catch (err) {
-      console.error(err);
-      alert("Gagal mengambil data dari server");
-    }
-  };
+    setData(merged);
+
+    setLeaders(
+      leadershipData.map((item) => ({
+        id: item.id,
+        name: item.name,
+        position: item.position,
+        gender: item.gender,
+        faculty: item.unit,
+      }))
+    );
+  } catch (err) {
+    console.error(err);
+    alert("Gagal mengambil data dari server");
+  }
+};
+
+
 
   useEffect(() => {
     fetchData();
@@ -130,6 +137,7 @@ const DemografiPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           data: data.map((item) => ({
+            year: selectedYear,
             id: item.id_staff,
             faculty: item.fakultas,
             male_count: item.staff_male,
@@ -173,6 +181,8 @@ const DemografiPage = () => {
     }
   };
 
+  
+
   const staffMaleTotal = data.reduce((sum, d) => sum + d.staff_male, 0);
   const staffFemaleTotal = data.reduce((sum, d) => sum + d.staff_female, 0);
   const studentMaleTotal = data.reduce((sum, d) => sum + d.student_male, 0);
@@ -185,10 +195,33 @@ const DemografiPage = () => {
   const totalLeader = leaderL + leaderP;
 
   const toPercent = (val, total) => (total > 0 ? ((val / total) * 100).toFixed(1) : 0);
+  
 
   return (
     <div className="p-6 space-y-4">
       <h1 className="text-xl font-semibold">Data Demografi</h1>
+      <div className="flex items-center gap-2 mb-4">
+  <label htmlFor="tahun" className="font-medium">Tahun Pelaporan:</label>
+  <select
+    id="tahun"
+    value={selectedYear}
+    onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+    className="border px-2 py-1 rounded"
+  >
+    {years.map((year) => (
+      <option key={year} value={year}>
+        {year}
+      </option>
+    ))}
+  </select>
+  <button
+    onClick={fetchData}
+    className="bg-green-600 text-white px-3 py-1 rounded"
+  >
+    Muat Data
+  </button>
+</div>
+
       <button
   onClick={() =>
     introJs().setOptions({
