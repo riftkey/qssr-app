@@ -154,17 +154,42 @@ const handleSubmit = async (indicatorCode) => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("https://qssr-app-production.up.railway.app/api/indikator");
-        const data = await res.json();
-        setIndikatorList(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const res = await fetch("https://qssr-app-production.up.railway.app/api/indikator");
+      const indikatorData = await res.json();
+
+      const enrichedData = await Promise.all(
+        indikatorData.map(async (indikator) => {
+          if (indikator.source_data === "QS") {
+            return { ...indikator, status: "QS (tidak perlu isi)" };
+          }
+
+          try {
+            const res = await fetch(`https://qssr-app-production.up.railway.app/api/data-collection/${indikator.code}/2025`);
+            const data = await res.json();
+            const sudahDiisi = data && data.value?.trim() && data.evidence_url?.trim();
+            return {
+              ...indikator,
+              status: sudahDiisi ? "Sudah Diisi" : "Belum Diisi",
+            };
+          } catch (err) {
+            return {
+              ...indikator,
+              status: "Belum Diisi",
+            };
+          }
+        })
+      );
+
+      setIndikatorList(enrichedData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchData();
+}, []);
+
 
   const handleExportCSV = () => {
   const csv = Papa.unparse(
@@ -239,6 +264,8 @@ const handleSubmit = async (indicatorCode) => {
             <th className="border p-2">Code</th>
             <th className="border p-2">Weight</th>
             <th className="border p-2">Source</th>
+            <th className="border p-2">Status</th>
+
           </tr>
         </thead>
         <tbody>
@@ -254,6 +281,22 @@ const handleSubmit = async (indicatorCode) => {
                 <td className="border p-2">{row.code}</td>
                 <td className="border p-2">{row.weight}</td>
                 <td className="border p-2">{row.source_data || "-"}</td>
+                <td className="border p-2">
+  {row.status === "Sudah Diisi" && (
+    <span className="text-green-600 font-semibold flex items-center gap-1">
+      ✅ Sudah Diisi
+    </span>
+  )}
+  {row.status === "Belum Diisi" && (
+    <span className="text-red-600 font-semibold flex items-center gap-1">
+      ❌ Belum Diisi 
+    </span>
+  )}
+  {row.status === "QS (tidak perlu isi)" && (
+    <span className="text-gray-500 italic">Tidak perlu diisi</span>
+  )}
+</td>
+
               </tr>
               {expandedIndex === idx && (
   <tr>
