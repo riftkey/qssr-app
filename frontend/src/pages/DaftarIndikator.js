@@ -168,7 +168,7 @@ const handleSubmit = async (indicatorCode) => {
           try {
             const res = await fetch(`https://qssr-app-production.up.railway.app/api/data-collection/${indikator.code}/2025`);
             const data = await res.json();
-            const sudahDiisi = data && data.value?.trim() && data.evidence_url?.trim();
+            const sudahDiisi = data && data.value?.trim() || data.evidence_url?.trim();
             return {
               ...indikator,
               status: sudahDiisi ? "Sudah Diisi" : "Belum Diisi",
