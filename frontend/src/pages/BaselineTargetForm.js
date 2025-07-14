@@ -7,6 +7,9 @@ const BaselineTargetForm = () => {
   const [baselineYear, setBaselineYear] = useState("");
   const [baselineEmission, setBaselineEmission] = useState("");
   const [targetYear, setTargetYear] = useState("");
+  const [yearError, setYearError] = useState("");
+  const [emissionError, setEmissionError] = useState("");
+
 
   // load data awal
   useEffect(() => {
@@ -72,16 +75,41 @@ const BaselineTargetForm = () => {
         <input
           type="number"
           value={baselineYear}
-          onChange={(e) => setBaselineYear(e.target.value)}
+          onChange={(e) => {
+          const value = e.target.value;
+          setBaselineYear(value);
+
+          const year = parseInt(value);
+          if (isNaN(year) || !Number.isInteger(year)) {
+            setYearError("Tahun harus berupa angka bulat");
+          } else if (year < 2005) {
+            setYearError("Tahun baseline tidak bisa di bawah 2005 berdasarkan aturan QS");
+          } else {
+            setYearError("");
+          }
+        }}
+
           className="border rounded p-2 w-full mb-2"
         />
+        {yearError && <p className="text-red-500 text-sm mb-2">{yearError}</p>}
         <label className="text-sm block mb-1">Baseline Emissions (tCO2e)</label>
         <input
           type="number"
           value={baselineEmission}
-          onChange={(e) => setBaselineEmission(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            setBaselineEmission(value);
+
+            if (value.trim() === "" || isNaN(parseFloat(value))) {
+              setEmissionError("Emisi harus berupa angka (boleh desimal)");
+            } else {
+              setEmissionError("");
+            }
+          }}
+
           className="border rounded p-2 w-full"
         />
+        {emissionError && <p className="text-red-500 text-sm mb-2">{emissionError}</p>}
       </div>
 
       {/* Target */}

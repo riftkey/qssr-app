@@ -15,6 +15,8 @@ const DaftarIndikator = () => {
   const [indikatorList, setIndikatorList] = useState([]);
   const [documentPath, setDocumentPath] = useState(null);
   const [stepsEnabled, setStepsEnabled] = useState(false);
+  const [urlError, setUrlError] = useState("");
+
 
   const handleStartTour = () => {
   introJs()
@@ -90,11 +92,24 @@ const DaftarIndikator = () => {
     }
   };
 
+const isValidURL = (string) => {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
 
 
 const handleSubmit = async (indicatorCode) => {
   const indikator = filteredData.find(i => i.code === indicatorCode);
   if (!indikator) return alert("Indikator tidak ditemukan");
+
+   // Validasi link bukti kalau tidak kosong
+  if (linkBukti.trim() !== "" && !isValidURL(linkBukti)) {
+    return alert("Link bukti tidak valid. Mohon masukkan URL yang benar (contoh: https://contoh.com)");
+  }
 
   let uploadedFilePath = null;
 
@@ -285,8 +300,16 @@ const handleSubmit = async (indicatorCode) => {
               type="text"
               className="border p-2 rounded w-full"
               value={linkBukti}
-              onChange={(e) => setLinkBukti(e.target.value)}
+              onChange={(e) => {
+              setLinkBukti(e.target.value);
+              if (e.target.value.trim() === "" || isValidURL(e.target.value)) {
+                setUrlError(""); // valid
+              } else {
+                setUrlError("Link tidak valid");
+              }
+            }}
             />
+            {urlError && <p className="text-red-500 text-sm mt-1">{urlError}</p>}
           </div>
 
           <div id="file-upload" className="mt-2">

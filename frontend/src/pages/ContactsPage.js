@@ -8,6 +8,10 @@ const ContactsPage = () => {
   const [contactType, setContactType] = useState("academician");
   const [searchTerm, setSearchTerm] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState({ show: false, id: null });
+  const validPronouns = ["Mr.", "Mrs.", "Ms.", "Miss", "Mx.", "Dr.", "Prof."];
+  const validTitles = ["Mr.", "Mrs.", "Ms.", "Miss", "Mx.", "Dr.", "Prof."];
+
+
 
   useEffect(() => {
     fetchContacts();
@@ -286,40 +290,54 @@ const ContactsPage = () => {
           </thead>
           <tbody>
             {contacts.map((c, idx) => (
-              <tr key={idx}>
-                {columns.map((col) => (
-                  <td key={col.key} className="border p-1">
-                    <input
-                      type="text"
-                      value={c[col.key] || ""}
-                      onChange={(e) =>
-                        handleInputChange(idx, col.key, e.target.value)
-                      }
-                      className="w-full border rounded px-1 py-0.5"
-                    />
-                  </td>
-                ))}
-                <td className="border p-1">
-                  {c.id && (
-                    <button
-                      onClick={() =>
-                        setDeleteConfirm({ show: true, id: c.id })
-                      }
-                      className="text-red-600 text-xs"
-                    >
-                      Hapus
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-            {contacts.length === 0 && (
-              <tr>
-                <td colSpan={columns.length + 1} className="text-center p-2">
-                  Tidak ada data
-                </td>
-              </tr>
+  <tr key={idx}>
+    {columns.map((col) => (
+      <td key={col.key} className="border p-1">
+        <div>
+          <input
+            type="text"
+            value={c[col.key] || ""}
+            onChange={(e) =>
+              handleInputChange(idx, col.key, e.target.value)
+            }
+            className="w-full border rounded px-1 py-0.5"
+          />
+          {/* Validasi Pronoun untuk academician */}
+          {contactType === "academician" &&
+            col.key === "pronoun" &&
+            c[col.key] &&
+            !validPronouns.includes(c[col.key].trim()) && (
+              <p className="text-red-600 text-xs mt-1">
+                Pronoun tidak valid. Gunakan: Mr., Mrs., Ms., Miss, Mx., Dr., atau Prof.
+              </p>
             )}
+
+          {/* Validasi Title untuk employer */}
+          {contactType === "employer" &&
+            col.key === "title" &&
+            c[col.key] &&
+            !validTitles.includes(c[col.key].trim()) && (
+              <p className="text-red-600 text-xs mt-1">
+                Title tidak valid. Gunakan: Mr., Mrs., Ms., Miss, Mx., Dr., atau Prof.
+              </p>
+            )}
+        </div>
+      </td>
+    ))}
+    <td className="border p-1">
+      {c.id && (
+        <button
+          onClick={() => setDeleteConfirm({ show: true, id: c.id })}
+          className="text-red-600 text-xs"
+        >
+          Hapus
+        </button>
+      )}
+    </td>
+  </tr>
+))}
+
+
           </tbody>
         </table>
       </div>

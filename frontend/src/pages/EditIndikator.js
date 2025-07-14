@@ -18,6 +18,16 @@ const EditIndikator = () => {
   });
 
   const [subindikatorList, setSubindikatorList] = useState([]);
+  const [qsLinkError, setQsLinkError] = useState("");
+
+  const isValidURL = (string) => {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
 
   const fetchIndikatorByKode = async () => {
     try {
@@ -60,9 +70,18 @@ const EditIndikator = () => {
   }, [kode]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const { name, value } = e.target;
+  setForm({ ...form, [name]: value });
+
+  if (name === "hyperlinkQS") {
+    if (value.trim() === "" || isValidURL(value)) {
+      setQsLinkError("");
+    } else {
+      setQsLinkError("Link QS tidak valid. Pastikan dimulai dengan http:// atau https://");
+    }
+  }
+};
+
 
   const handleAddSubindikator = () => {
     setSubindikatorList([...subindikatorList, { nama: "" }]);
@@ -246,6 +265,7 @@ const handleDelete = async () => {
               onChange={handleChange}
               placeholder="httpss://...."
             />
+            {qsLinkError && <p className="text-red-500 text-sm mt-1">{qsLinkError}</p>}
           </div>
         )}
 
